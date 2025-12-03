@@ -150,7 +150,7 @@ export async function streamText(props: {
   );
 
   let systemPrompt =
-    PromptLibrary.getPropmtFromLibrary(promptId || 'default', {
+    PromptLibrary.getPromptFromLibrary(promptId || 'default', {
       cwd: WORK_DIR,
       allowedHtmlElements: allowedHTMLElements,
       modificationTagName: MODIFICATIONS_TAG_NAME,
@@ -307,5 +307,34 @@ export async function streamText(props: {
     ),
   );
 
-  return await _streamText(streamParams);
+  try {
+    return await _streamText(streamParams);
+  } catch (error: any) {
+    // Handle Google API validation errors when content is blocked by PROHIBITED_CONTENT
+    const errorMessage = error?.message || String(error);
+
+    if (
+      errorMessage.includes('expected string received undefined') &&
+      (errorMessage.includes('role') || errorMessage.includes('parts'))
+    ) {
+      logger.error(
+        `Google API returned blocked content (PROHIBITED_CONTENT). Provider: ${provider.name}, Model: ${modelDetails.name}`,
+        { originalError: errorMessage },
+      );
+
+      // Return a safe response that satisfies the type validation
+      return {
+        text: '❌ Seu pedido foi bloqueado por política de conteúdo da Google. Por favor, reformule sua solicitação com termos mais apropriados.',
+        finishReason: 'blocked-content',
+        usage: {
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+      } as any;
+    }
+
+    // Re-throw other errors
+    throw error;
+  }
 }

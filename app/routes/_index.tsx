@@ -4,9 +4,10 @@ import { BaseChat } from '~/components/chat/BaseChat';
 import { Chat } from '~/components/chat/Chat.client';
 import { Header } from '~/components/header/Header';
 import BackgroundRays from '~/components/ui/BackgroundRays';
+import StorageBackupManager from '~/components/ui/StorageBackupManager';
 
 export const meta: MetaFunction = () => {
-  return [{ title: 'Bolt' }, { name: 'description', content: 'Talk with Bolt, an AI assistant from StackBlitz' }];
+  return [{ title: 'R3' }, { name: 'description', content: 'Talk with R3, an AI assistant from StackBlitz' }];
 };
 
 export const loader = () => json({});
@@ -23,6 +24,10 @@ export default function Index() {
       <BackgroundRays />
       <Header />
       <ClientOnly fallback={<BaseChat />}>{() => <Chat />}</ClientOnly>
+      <ClientOnly>{() => <StorageBackupManager />}</ClientOnly>
+      <footer className="text-center py-4 text-xs text-bolt-elements-textSecondary border-t border-bolt-elements-borderColor">
+        Dev: Alexandre Cavalcante -R3-Builder®
+      </footer>
     </div>
   );
 }

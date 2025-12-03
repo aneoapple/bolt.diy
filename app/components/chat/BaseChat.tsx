@@ -15,7 +15,6 @@ import Cookies from 'js-cookie';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import styles from './BaseChat.module.scss';
 import { ImportButtons } from '~/components/chat/chatExportAndImport/ImportButtons';
-import { ExamplePrompts } from '~/components/chat/ExamplePrompts';
 import GitCloneButton from './GitCloneButton';
 import type { ProviderInfo } from '~/types/model';
 import StarterTemplates from './StarterTemplates';
@@ -34,7 +33,7 @@ import type { DesignScheme } from '~/types/design-scheme';
 import type { ElementInfo } from '~/components/workbench/Inspector';
 import LlmErrorAlert from './LLMApiAlert';
 
-const TEXTAREA_MIN_HEIGHT = 76;
+const TEXTAREA_MIN_HEIGHT = 100;
 
 interface BaseChatProps {
   textareaRef?: React.RefObject<HTMLTextAreaElement> | undefined;
@@ -350,11 +349,24 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
           <div className={classNames(styles.Chat, 'flex flex-col flex-grow lg:min-w-[var(--chat-min-width)] h-full')}>
             {!chatStarted && (
               <div id="intro" className="mt-[16vh] max-w-2xl mx-auto text-center px-4 lg:px-0">
-                <h1 className="text-3xl lg:text-6xl font-bold text-bolt-elements-textPrimary mb-4 animate-fade-in">
-                  Where ideas begin
+                <div className="flex justify-center mb-6 animate-fade-in">
+                  <img
+                    src="/hero-logo.png"
+                    alt="bolt.diy logo"
+                    className="mx-auto"
+                    style={{ maxWidth: '360px', width: '100%', transform: 'scale(1.05)' }}
+                    referrerPolicy="no-referrer"
+                    onError={(event) => {
+                      const target = event.currentTarget as HTMLImageElement;
+                      target.src = 'https://i.imgur.com/IXIYfAm.png';
+                    }}
+                  />
+                </div>
+                <h1 className="text-3xl lg:text-7xl font-bold mb-6 animate-fade-in" style={{ color: '#50A0FF' }}>
+                  Onde as ideias começam
                 </h1>
-                <p className="text-md lg:text-xl mb-8 text-bolt-elements-textSecondary animate-fade-in animation-delay-200">
-                  Bring ideas to life in seconds or get help on existing projects.
+                <p className="text-base lg:text-lg mb-12 text-bolt-elements-textSecondary animate-fade-in animation-delay-200 max-w-xl mx-auto">
+                  Dê vida às suas ideias em segundos ou obtenha ajuda em projetos existentes.
                 </p>
               </div>
             )}
@@ -476,15 +488,6 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 </div>
               )}
               <div className="flex flex-col gap-5">
-                {!chatStarted &&
-                  ExamplePrompts((event, messageInput) => {
-                    if (isStreaming) {
-                      handleStop?.();
-                      return;
-                    }
-
-                    handleSendMessage?.(event, messageInput);
-                  })}
                 {!chatStarted && <StarterTemplates />}
               </div>
             </div>

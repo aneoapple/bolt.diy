@@ -25,8 +25,8 @@ const toastAnimation = cssTransition({
 export const links: LinksFunction = () => [
   {
     rel: 'icon',
-    href: '/favicon.svg',
-    type: 'image/svg+xml',
+    href: 'https://imgur.com/MYJ5sCt.png',
+    type: 'image/png',
   },
   { rel: 'stylesheet', href: reactToastifyStyles },
   { rel: 'stylesheet', href: tailwindReset },
@@ -77,6 +77,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     document.querySelector('html')?.setAttribute('data-theme', theme);
   }, [theme]);
+
+  // Suppress extension errors
+  useEffect(() => {
+    const originalError = console.error;
+    console.error = (...args: any[]) => {
+      const message = args[0]?.toString?.() || '';
+      if (message.includes('content_script') || message.includes('reading \'control\'')) {
+        return;
+      }
+      originalError.apply(console, args);
+    };
+  }, []);
 
   return (
     <>

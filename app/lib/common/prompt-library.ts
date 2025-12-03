@@ -28,21 +28,22 @@ export class PromptLibrary {
     }
   > = {
     default: {
-      label: 'Default Prompt',
-      description: 'An fine tuned prompt for better results and less token usage',
+      label: 'R3 Pro (UX/UI Premium)',
+      description: 'Prompt refinado para interfaces de alto nível (estilo Apple/Stripe), design system avançado e código limpo.',
       get: (options) => getFineTunedPrompt(options.cwd, options.supabase, options.designScheme),
     },
     original: {
-      label: 'Old Default Prompt',
-      description: 'The OG battle tested default system Prompt',
+      label: 'R3 Clássico (Robusto)',
+      description: 'O prompt de sistema original, testado em batalha. Ideal para lógica complexa e instruções detalhadas.',
       get: (options) => getSystemPrompt(options.cwd, options.supabase, options.designScheme),
     },
     optimized: {
-      label: 'Optimized Prompt (experimental)',
-      description: 'An Experimental version of the prompt for lower token usage',
+      label: 'R3 Lite (Experimental)',
+      description: 'Versão otimizada para menor consumo de tokens e respostas mais rápidas.',
       get: (options) => optimized(options),
     },
   };
+
   static getList() {
     return Object.entries(this.library).map(([key, value]) => {
       const { label, description } = value;
@@ -53,11 +54,12 @@ export class PromptLibrary {
       };
     });
   }
-  static getPropmtFromLibrary(promptId: string, options: PromptOptions) {
+
+  static getPromptFromLibrary(promptId: string, options: PromptOptions) {
     const prompt = this.library[promptId];
 
     if (!prompt) {
-      throw 'Prompt Now Found';
+      throw 'Prompt não encontrado na biblioteca';
     }
 
     return this.library[promptId]?.get(options);

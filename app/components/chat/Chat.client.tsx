@@ -323,10 +323,21 @@ export const ChatImpl = memo(
         return;
       }
 
-      await Promise.all([
-        animate('#examples', { opacity: 0, display: 'none' }, { duration: 0.1 }),
-        animate('#intro', { opacity: 0, flex: 1 }, { duration: 0.2, ease: cubicEasingFn }),
-      ]);
+      const animationsToRun = [];
+      const examplesEl = document.querySelector('#examples');
+      const introEl = document.querySelector('#intro');
+
+      if (examplesEl) {
+        animationsToRun.push(animate('#examples', { opacity: 0, display: 'none' }, { duration: 0.1 }));
+      }
+
+      if (introEl) {
+        animationsToRun.push(animate('#intro', { opacity: 0, flex: 1 }, { duration: 0.2, ease: cubicEasingFn }));
+      }
+
+      if (animationsToRun.length > 0) {
+        await Promise.all(animationsToRun);
+      }
 
       chatStore.setKey('started', true);
 
