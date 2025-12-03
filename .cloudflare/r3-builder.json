@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "name": "r3-builder",
+  "main": "build/server/index.js",
+  "env": {
+    "production": {}
+  }
+}
