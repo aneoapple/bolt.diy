@@ -43,6 +43,14 @@ export default defineConfig((config) => {
         exclude: ['child_process', 'fs', 'path'],
       }),
       {
+        name: 'util-types-stub',
+        resolveId(id) {
+          if (id === 'util/types') {
+            return this.resolve('util');
+          }
+        },
+      },
+      {
         name: 'buffer-polyfill',
         transform(code, id) {
           if (id.includes('env.mjs')) {
