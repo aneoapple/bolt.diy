@@ -23,6 +23,13 @@ export default defineConfig((config) => {
       target: 'esnext',
       sourcemap: false,
       minify: 'esbuild',
+      rollupOptions: {
+        external: ['undici', 'util'],
+      },
+    },
+    ssr: {
+      external: ['undici', 'util'],
+      noExternal: [],
     },
     // Fixamos o host e a porta para garantir que o builder externo consiga sempre acessar o Vite em http://localhost:5173.
     server: {
