@@ -335,6 +335,9 @@ importers:
       tailwind-merge:
         specifier: ^2.2.1
         version: 2.6.0
+      undici:
+        specifier: ^7.14.0
+        version: 7.14.0
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
