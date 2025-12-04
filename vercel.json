@@ -2,8 +2,5 @@
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm run build",
   "outputDirectory": "build/client",
-  "framework": "remix",
-  "serverFunctions": {
-    "directory": "build/server"
-  }
+  "framework": "remix"
 }
