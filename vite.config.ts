@@ -13,6 +13,11 @@ dotenv.config();
 
 export default defineConfig((config) => {
   return {
+    resolve: {
+      alias: {
+        'util/types': 'util',
+      },
+    },
     define: {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     },
