@@ -1,0 +1,15 @@
+{
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "build/client",
+  "framework": "remix",
+  "nodeVersion": "18.x",
+  "env": {
+    "GOOGLE_GENERATIVE_AI_API_KEY": "@google_ai_key",
+    "OPENAI_API_KEY": "@openai_key",
+    "ANTHROPIC_API_KEY": "@anthropic_key"
+  },
+  "buildConfig": {
+    "maxLambdaSize": "52428800"
+  }
+}

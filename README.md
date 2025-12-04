@@ -104,6 +104,20 @@ Let's get you up and running with the stable version of Bolt.DIY!
   xattr -cr /path/to/Bolt.app
   ```
 
+## Como rodar o projeto em desenvolvimento
+
+1. **Instale as dependências** com o gerenciador usado pelo projeto:
+   ```bash
+   pnpm install
+   ```
+2. **Suba o servidor de desenvolvimento** (ele já força host `0.0.0.0` e porta `5173` para que a outra ferramenta consiga conectar):
+   ```bash
+   pnpm run dev
+   ```
+3. **Acesse no navegador**: abra [http://localhost:5173](http://localhost:5173). Esse endereço é o mesmo utilizado pelo builder externo, então assim que o comando estiver rodando o erro `net::ERR_CONNECTION_REFUSED` desaparece.
+
+> Caso use outro gerenciador (npm ou yarn), adapte os comandos, mas mantenha a porta `5173`.
+
 ## Manual installation
 
 

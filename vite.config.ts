@@ -1,4 +1,4 @@
-import { cloudflareDevProxyVitePlugin as remixCloudflareDevProxy, vitePlugin as remixVitePlugin } from '@remix-run/dev';
+import { vitePlugin as remixVitePlugin } from '@remix-run/dev';
 import UnoCSS from 'unocss/vite';
 import { defineConfig, type ViteDevServer } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
@@ -18,6 +18,13 @@ export default defineConfig((config) => {
     },
     build: {
       target: 'esnext',
+      sourcemap: false,
+      minify: 'esbuild',
+    },
+    // Fixamos o host e a porta para garantir que o builder externo consiga sempre acessar o Vite em http://localhost:5173.
+    server: {
+      host: '0.0.0.0',
+      port: 5173,
     },
     plugins: [
       nodePolyfills({
@@ -43,7 +50,6 @@ export default defineConfig((config) => {
           return null;
         },
       },
-      config.mode !== 'test' && remixCloudflareDevProxy(),
       remixVitePlugin({
         future: {
           v3_fetcherPersist: true,

@@ -363,6 +363,9 @@ importers:
       '@iconify/types':
         specifier: ^2.0.0
         version: 2.0.0
+      '@netlify/remix-adapter':
+        specifier: ^2.7.0
+        version: 2.7.0(typescript@5.9.3)(vite@5.4.21(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3))
       '@remix-run/dev':
         specifier: ^2.15.2
         version: 2.17.2(@remix-run/react@2.17.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(@remix-run/serve@2.17.2(typescript@5.9.3))(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(typescript@5.9.3)(vite@5.4.21(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3))(wrangler@4.52.1(@cloudflare/workers-types@4.20251202.0))
@@ -2177,6 +2180,15 @@ packages:
     peerDependencies:
       nanostores: ^0.9.0 || ^0.10.0 || ^0.11.0
       react: '>=18.0.0'
+
+  '@netlify/remix-adapter@2.7.0':
+    resolution: {integrity: sha512-CiJvJ6NXDXLm3MGGxkL/2abqlD5TkSrQMDyO6Vsbn6VdbRvcRoVw0AuPKE8B0pq070ve6pmeh5sY3+JdOuctJA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      vite: '>=5.0.0'
+    peerDependenciesMeta:
+      vite:
+        optional: true
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -5647,6 +5659,10 @@ packages:
 
   isbot@4.4.0:
     resolution: {integrity: sha512-8ZvOWUA68kyJO4hHJdWjyreq7TYNWTS9y15IzeqVdKxR9pPr3P/3r9AHcoIv9M0Rllkao5qWz2v1lmcyKIVCzQ==}
+    engines: {node: '>=18'}
+
+  isbot@5.1.32:
+    resolution: {integrity: sha512-VNfjM73zz2IBZmdShMfAUg10prm6t7HFUQmNAEOAVS4YH92ZrZcvkMcGX6cIgBJAzWDzPent/EeAtYEHNPNPBQ==}
     engines: {node: '>=18'}
 
   isexe@2.0.0:
@@ -10331,6 +10347,15 @@ snapshots:
       nanostores: 0.10.3
       react: 18.3.1
 
+  '@netlify/remix-adapter@2.7.0(typescript@5.9.3)(vite@5.4.21(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3))':
+    dependencies:
+      '@remix-run/node': 2.17.2(typescript@5.9.3)
+      isbot: 5.1.32
+    optionalDependencies:
+      vite: 5.4.21(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)
+    transitivePeerDependencies:
+      - typescript
+
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -14602,6 +14627,8 @@ snapshots:
   isbinaryfile@5.0.7: {}
 
   isbot@4.4.0: {}
+
+  isbot@5.1.32: {}
 
   isexe@2.0.0: {}
 

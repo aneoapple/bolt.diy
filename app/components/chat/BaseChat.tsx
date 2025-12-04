@@ -80,6 +80,7 @@ interface BaseChatProps {
   selectedElement?: ElementInfo | null;
   setSelectedElement?: (element: ElementInfo | null) => void;
   addToolResult?: ({ toolCallId, result }: { toolCallId: string; result: any }) => void;
+  onTemplateSelect?: (prompt: string) => void;
 }
 
 export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
@@ -129,6 +130,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
       addToolResult = () => {
         throw new Error('addToolResult not implemented');
       },
+      onTemplateSelect,
     },
     ref,
   ) => {
@@ -488,7 +490,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 </div>
               )}
               <div className="flex flex-col gap-5">
-                {!chatStarted && <StarterTemplates />}
+                {!chatStarted && <StarterTemplates onSelect={onTemplateSelect} />}
               </div>
             </div>
           </div>

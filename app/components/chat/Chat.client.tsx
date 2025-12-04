@@ -675,6 +675,13 @@ export const ChatImpl = memo(
         selectedElement={selectedElement}
         setSelectedElement={setSelectedElement}
         addToolResult={addToolResult}
+        onTemplateSelect={(prompt) => {
+          setInput(prompt);
+          requestAnimationFrame(() => {
+            textareaRef.current?.focus();
+            textareaRef.current?.setSelectionRange(prompt.length, prompt.length);
+          });
+        }}
       />
     );
   },
