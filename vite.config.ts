@@ -5,6 +5,7 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { optimizeCssModules } from 'vite-plugin-optimize-css-modules';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import * as dotenv from 'dotenv';
+import * as path from 'path';
 
 // Load environment variables from multiple files
 dotenv.config({ path: '.env.local' });
@@ -15,7 +16,7 @@ export default defineConfig((config) => {
   return {
     resolve: {
       alias: {
-        'util/types': 'util',
+        'util/types': path.resolve(__dirname, './util-types-stub.js'),
       },
     },
     define: {
