@@ -5,7 +5,6 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { optimizeCssModules } from 'vite-plugin-optimize-css-modules';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import * as dotenv from 'dotenv';
-import * as path from 'path';
 
 // Load environment variables from multiple files
 dotenv.config({ path: '.env.local' });
@@ -15,9 +14,7 @@ dotenv.config();
 export default defineConfig((config) => {
   return {
     resolve: {
-      alias: {
-        'util/types': path.resolve(__dirname, './util-types-stub.js'),
-      },
+      alias: {},
     },
     define: {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
@@ -43,14 +40,6 @@ export default defineConfig((config) => {
         protocolImports: true,
         exclude: ['child_process', 'fs', 'path'],
       }),
-      {
-        name: 'util-types-stub',
-        resolveId(id) {
-          if (id === 'util/types') {
-            return this.resolve('util');
-          }
-        },
-      },
       {
         name: 'buffer-polyfill',
         transform(code, id) {
