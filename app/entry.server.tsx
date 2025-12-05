@@ -1,7 +1,7 @@
 import type { AppLoadContext } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
 import { isbot } from 'isbot';
-import ReactDOMServer from 'react-dom/server';
+import { renderToReadableStream } from 'react-dom/server';
 import { renderHeadToString } from 'remix-island';
 import { Head } from './root';
 
@@ -12,7 +12,6 @@ export default async function handleRequest(
   remixContext: any,
   _loadContext: AppLoadContext,
 ) {
-  const { renderToReadableStream } = ReactDOMServer;
   // await initializeModelList({});
 
   const readable = await renderToReadableStream(<RemixServer context={remixContext} url={request.url} />, {
