@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import type { MetaFunction } from '@remix-run/cloudflare';
+import type { MetaFunction } from '@remix-run/node';
 
 const WHATSAPP_BASE = 'https://wa.me/5511999999999';
 
