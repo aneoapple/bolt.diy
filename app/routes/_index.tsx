@@ -22,7 +22,7 @@ export default function Index() {
   return (
     <div className="flex flex-col h-full w-full bg-bolt-elements-background-depth-1">
       <BackgroundRays />
-      <Header />
+      <ClientOnly>{() => <Header />}</ClientOnly>
       <ClientOnly fallback={<BaseChat />}>{() => <Chat />}</ClientOnly>
       <ClientOnly>{() => <StorageBackupManager />}</ClientOnly>
       <footer className="text-center py-4 text-xs text-bolt-elements-textSecondary border-t border-bolt-elements-borderColor">
