@@ -72,27 +72,30 @@ export const Head = createHead(() => (
 ));
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    // Sync with nanostores on client side
-    const theme = localStorage.getItem('bolt_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.querySelector('html')?.setAttribute('data-theme', theme);
-  }, []);
-
-  // Suppress extension errors
-  useEffect(() => {
-    const originalError = console.error;
-    console.error = (...args: any[]) => {
-      const message = args[0]?.toString?.() || '';
-      if (message.includes('content_script') || message.includes('reading \'control\'')) {
-        return;
-      }
-      originalError.apply(console, args);
-    };
-  }, []);
-
   return (
     <>
-      <ClientOnly>{() => <DndProvider backend={HTML5Backend}>{children}</DndProvider>}</ClientOnly>
+      <ClientOnly>
+        {() => {
+          // All side effects and hooks run only on client
+          useEffect(() => {
+            const theme = localStorage.getItem('bolt_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.querySelector('html')?.setAttribute('data-theme', theme);
+          }, []);
+
+          useEffect(() => {
+            const originalError = console.error;
+            console.error = (...args: any[]) => {
+              const message = args[0]?.toString?.() || '';
+              if (message.includes('content_script') || message.includes('reading \'control\'')) {
+                return;
+              }
+              originalError.apply(console, args);
+            };
+          }, []);
+
+          return <DndProvider backend={HTML5Backend}>{children}</DndProvider>;
+        }}
+      </ClientOnly>
       <ToastContainer
         closeButton={({ closeToast }) => {
           return (
